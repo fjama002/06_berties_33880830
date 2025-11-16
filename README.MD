@@ -1,8 +1,8 @@
 # Berties Books
 
-Sample code for Dynamic Web Applications module.
+Modified code for Dynamic Web Applications module.
 
-Uses node.js with Express and EJS.
+A books website that uses node.js with Express, EJS and some basic SQL (to access databases).
 
 To install and run:
 

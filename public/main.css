@@ -1,3 +1,4 @@
+/* Headings */
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -10,6 +11,7 @@ h2 {
   color: cadetblue;
 }
 
+/* Text and Lists */
 p,
 li,
 ul {
@@ -22,14 +24,14 @@ a:link {
   padding: 5px;
 }
 
-/* visited link */
+/* Visited links */
 a:visited {
   color: tomato;
   text-decoration: none;
   padding: 5px;
 }
 
-/* mouse over link */
+/* Hover over links */
 a:hover {
   color: white;
   text-decoration: none;
@@ -37,7 +39,7 @@ a:hover {
   padding: 5px;
 }
 
-/* selected link */
+/* Selected link */
 a:active {
   color: blue;
   text-decoration: none;
