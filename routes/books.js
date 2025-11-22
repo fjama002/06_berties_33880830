@@ -6,7 +6,7 @@ router.get("/search", function (req, res, next) {
   res.render("search.ejs");
 });
 
-router.get("/search-result", function (req, res, next) {
+router.get("/search_result", function (req, res, next) {
   //searching in the database
   res.send("You searched for: " + req.query.keyword);
 });
@@ -22,6 +22,10 @@ router.get("/list", function (req, res, next) {
   });
 });
 
+router.get("/addbook", function (req, res, next) {
+  res.render("addbook.ejs");
+});
+
 router.post("/bookadded", function (req, res, next) {
   // saving data in database
   let sqlquery = "INSERT INTO books (name, price) VALUES (?,?)";
@@ -32,7 +36,7 @@ router.post("/bookadded", function (req, res, next) {
       next(err);
     } else
       res.send(
-        "This book is added to database, name: " +
+        "This book is added to the database, name: " +
           req.body.name +
           ", price " +
           req.body.price
@@ -44,8 +48,8 @@ router.get("/bargainbooks", function (req, res, next) {
   // retrieve data in database
   let sqlquery = "SELECT name, price FROM books WHERE price<20;";
   // execute sql query
-  let bargainrecord = [req.body.name, req.body.price];
-  db.query(sqlquery, bargainrecord, (err, result) => {
+  let newrecord = [req.body.name, req.body.price];
+  db.query(sqlquery, newrecord, (err, result) => {
     if (err) {
       next(err);
     } else res.send("Name: " + req.body.name + ", price " + req.body.price);
