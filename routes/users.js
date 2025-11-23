@@ -29,15 +29,6 @@ router.post("/registered", function (req, res, next) {
       if (err) {
         next(err);
       } else
-        res.send(
-          " Hello " +
-            req.body.firstname +
-            " " +
-            req.body.lastname +
-            " you are now registered!  We will send an email to you at " +
-            req.body.email
-        );
-
       result =
         "Hello " +
         req.body.firstname +
@@ -50,6 +41,7 @@ router.post("/registered", function (req, res, next) {
         req.body.password +
         " and your hashed password is: " +
         hashedPassword;
+        
       res.send(result);
     });
   });
@@ -64,6 +56,14 @@ router.get("/list", function (req, res, next) {
     }
     res.render("users.ejs", { availableUsers: result });
   });
+});
+
+router.get("/login", function (req, res, next) {
+  res.render("login.ejs");
+});
+
+router.get("/loggedin", function (req, res, next) {
+  res.send("Login successful!")
 });
 
 // Export the router object so index.js can access it

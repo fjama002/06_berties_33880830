@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>Bargain @ <%=shopData.shopName%></h1>
+    <h2>Here are the list of books at a bargain:</h2>
     <ul>
       <% availableBooks.forEach(function(book) { %>
       <li><%= book.name %>, $<%= book.price %></li>

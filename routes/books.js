@@ -38,7 +38,7 @@ router.post("/bookadded", function (req, res, next) {
       res.send(
         "This book is added to the database, name: " +
           req.body.name +
-          ", price " +
+          ", at price: " +
           req.body.price
       );
   });
