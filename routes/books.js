@@ -22,8 +22,10 @@ router.get("/list", function (req, res, next) {
   });
 });
 
-router.get("/addbook", function (req, res, next) {
-  res.render("addbook.ejs");
+app.get('/list', redirectLogin, function (req, res) {
+  router.get("/addbook", function (req, res, next) {
+    res.render("addbook.ejs");
+  })
 });
 
 router.post("/bookadded", function (req, res, next) {
@@ -37,23 +39,25 @@ router.post("/bookadded", function (req, res, next) {
     } else
       res.send(
         "This book is added to the database, name: " +
-          req.body.name +
-          ", at price: " +
-          req.body.price
+        req.body.name +
+        ", at price: " +
+        req.body.price
       );
   });
 });
 
-router.get("/bargainbooks", function (req, res, next) {
-  // retrieve data in database
-  let sqlquery = "SELECT name, price FROM books WHERE price<20;";
-  // execute sql query
-  let newrecord = [req.body.name, req.body.price];
-  db.query(sqlquery, newrecord, (err, result) => {
-    if (err) {
-      next(err);
-    } else res.send("Name: " + req.body.name + ", price " + req.body.price);
-  });
+app.get('/list', redirectLogin, function (req, res) {
+  router.get("/bargainbooks", function (req, res, next) {
+    // retrieve data in database
+    let sqlquery = "SELECT name, price FROM books WHERE price<20;";
+    // execute sql query
+    let newrecord = [req.body.name, req.body.price];
+    db.query(sqlquery, newrecord, (err, result) => {
+      if (err) {
+        next(err);
+      } else res.send("Name: " + req.body.name + ", price " + req.body.price);
+    });
+  })
 });
 
 // Export the router object so index.js can access it
