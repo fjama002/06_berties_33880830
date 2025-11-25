@@ -55,7 +55,7 @@ router.post("/registered", function (req, res, next) {
   });
 });
 
-app.get('/list', redirectLogin, function (req, res) {
+router.get('/list', redirectLogin, function (req, res) {
   router.get("/list", function (req, res, next) {
     let sqlquery = "SELECT username FROM user_details"; // query database to get all the users
     // execute sql query
