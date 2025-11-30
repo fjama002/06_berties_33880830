@@ -23,6 +23,8 @@ const db = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
+There is restricted access for accessing user lists, adding books and bargain books.
+
 To install and run:
 npm install
 node index.js
