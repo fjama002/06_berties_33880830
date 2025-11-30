@@ -15,14 +15,15 @@ router.get("/search", function (req, res, next) {
 });
 
 router.get("/search_result", function (req, res, next) {
-  [check("keyword").trim().notEmpty().withMessage("Search input required")],
+  [check("keyword").trim().notEmpty().withMessage("Search input required")];
     (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.render("search.ejs", { errors: errors.array() });
       }
       //searching in the database
-      res.send("You searched for: " + req.query.keyword);
+      let keyword = req.sanitize(req.query.keyword);
+      res.send("You searched for: " + keyword);
     };
 });
 
@@ -42,34 +43,26 @@ router.get("/addbook", function (req, res, next) {
 });
 
 router.post("/bookadded", function (req, res, next) {
+  [check("keyword").trim().notEmpty().withMessage("Search input required")];
   // saving data in database
   let sqlquery = "INSERT INTO books (name, price) VALUES (?,?)";
   // execute sql query
-  let newrecord = [req.body.name, req.body.price];
+  let newrecord = [req.sanitize(req.body.name), req.sanitize(req.body.price)];
   db.query(sqlquery, newrecord, (err, result) => {
     if (err) {
       next(err);
-    } else
-      res.send(
-        "This book is added to the database, name: " +
-          req.body.name +
-          ", at price: " +
-          req.body.price
-      );
+    } else res.send("You added: " + newrecord);
   });
 });
 
 router.get("/bargainbooks", redirectLogin, function (req, res) {
-  router.get("/bargainbooks", function (req, res, next) {
-    // retrieve data in database
-    let sqlquery = "SELECT name, price FROM books WHERE price<20;";
-    // execute sql query
-    let newrecord = [req.body.name, req.body.price];
-    db.query(sqlquery, newrecord, (err, result) => {
-      if (err) {
-        next(err);
-      } else res.send("Name: " + req.body.name + ", price " + req.body.price);
-    });
+  // retrieve data in database
+  let sqlquery = "SELECT name, price FROM books WHERE price<20;";
+  // execute sql query
+  db.query(sqlquery, newrecord, (err, result) => {
+    if (err) 
+    return next(err);
+    res.render("bargainbooks.ejs", { bargainBooks: result });
   });
 });
 

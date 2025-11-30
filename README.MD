@@ -1,7 +1,8 @@
-# Berties Books
+# **Berties Book Shop Application**
 
 ## Brief Explanation
 Modified code for Dynamic Web Applications module.
+Master code @lewfer/gs-dwa-berties-books-initial-code
 
 A books website that uses node.js, Express, EJS, SQL and dotenv.
 
@@ -28,14 +29,22 @@ const db = mysql.createPool({
 There is restricted access for accessing user lists, adding books and bargain books.
 
 ## Input Validation
-Validation ensures that input fields are not empty and gives the user a reason why their process did not go through as they may have intended e.g. "input required".
+Validation ensures that inputs are as they should be, e.g. an email is in the format of an email.
 
-Input validation was added to the registration, login and search books page. 
+Input validation was added to the registration, login, search and add books page.
 
-Included isEmail() validation to the registration and login pages so that the email is inputted in the correct format (e.g a@a.com).
+Included:
+isEmail() validation to the registration and login pages so that the email is inputted in the correct format (e.g a@a.com)
+.trim to prevent leading and trailing spaces
+.notEmpty to ensure input fields are not empty and displayed it .withMessage("") to show the user what they need to input and how
 
-To install and run:
+## Input Sanitisation
+Sanitisation cleans input fields to prevents XSS attacks and so that users can not maliciously access data.
+
+Input sanitisation was added to the registration, login, search and add books page by adding .sanitize to requests.
+
+## Running the application
 npm install
 node index.js
 
-Browse http://localhost:8000
+Browse to http://localhost:8000
