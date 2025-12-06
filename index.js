@@ -1,7 +1,7 @@
 // Import express and ejs
 var express = require("express");
 var session = require("express-session");
-const expressSanitizer = require('express-sanitizer');
+const expressSanitizer = require("express-sanitizer");
 var ejs = require("ejs");
 const path = require("path");
 var mysql = require("mysql2");

@@ -16,15 +16,15 @@ router.get("/search", function (req, res, next) {
 
 router.get("/search_result", function (req, res, next) {
   [check("keyword").trim().notEmpty().withMessage("Search input required")];
-    (req, res, next) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.render("search.ejs", { errors: errors.array() });
-      }
-      //searching in the database
-      let keyword = req.sanitize(req.query.keyword);
-      res.send("You searched for: " + keyword);
-    };
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("search.ejs", { errors: errors.array() });
+    }
+    //searching in the database
+    let keyword = req.sanitize(req.query.keyword);
+    res.send("You searched for: " + keyword);
+  };
 });
 
 router.get("/list", redirectLogin, function (req, res, next) {
@@ -60,8 +60,7 @@ router.get("/bargainbooks", redirectLogin, function (req, res) {
   let sqlquery = "SELECT name, price FROM books WHERE price<20;";
   // execute sql query
   db.query(sqlquery, newrecord, (err, result) => {
-    if (err) 
-    return next(err);
+    if (err) return next(err);
     res.render("bargainbooks.ejs", { bargainBooks: result });
   });
 });
