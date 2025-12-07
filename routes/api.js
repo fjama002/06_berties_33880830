@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const request = require("request");
 
+router.get('/', function (req, res, next) {
+    res.render("api.ejs");
+});
+
 router.get('/books', function (req, res, next) {
 
     // Query database to get all the books
@@ -18,4 +22,4 @@ router.get('/books', function (req, res, next) {
             res.json(result)
         }
     })
-})
+});
