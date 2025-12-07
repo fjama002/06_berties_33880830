@@ -23,3 +23,6 @@ router.get('/books', function (req, res, next) {
         }
     })
 });
+
+// Export the router object so index.js can access it
+module.exports = router;
